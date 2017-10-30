@@ -74,3 +74,52 @@
         * non-simultaneous update (wrong implementation,another algorithm)
 
         * Batch gradient descent
+
+* Multivariable Linear Regression
+
+    * notation
+
+        * the hypothesis $h_\theta(x)=\theta_0+\theta_1 x_1 + \cdots \theta_n x_n$
+
+        * $x_j^{(i)}$ is the $i^{th}$ input of feature $j$
+
+        * surpose $x_0=0$
+            $h_\theta(x)=\theta^T x$ where $\theta=[\theta_0, \theta_1,\cdots,\theta_n]^T$ and $x=[x_0, x_1,\cdots,x_n]^T$
+
+    * Gradient descent
+
+        * the cost function
+
+            $$J(\theta)=J(\theta_0, \theta_1,\cdots,\theta_n) = \frac{1}{2m}\sum_{i=1}^n(h_\theta(x^{(i)})-y^{(i)})^2 = \frac{1}{2m}\sum_{i=1}^n(\theta^T x^{(i)}-y^{(i)})^2$$
+
+        * algorithm
+            repeate until convergence {
+                $\displaystyle{\theta_j := \theta_j - \alpha \frac{\partial}{\partial \theta_j} J(\theta)}$ (for $j=0 \cdots n$)
+            }
+
+        * Feature scaling
+
+        * Mean normalization
+
+    * Polynomial Regression
+
+        $$h_\theta(x)=\theta_0+\theta_1 x_1 + \theta_2 x_1^2$$
+
+* Normal Equation
+
+    $$\theta=(X^T X ^{-1} X^T y$$
+
+    * advantages and disadvangtages
+
+        | Gradient Descent           | Normal Equation                            |
+        |:---------------------------|:-------------------------------------------|
+        | Need to choose alpha       | No need to choose alpha                    |
+        | Needs many iterations      | No need to iterate                         |
+        | $O(kn^2)$                  | $O(n^3)$, need to calculate inverse of XTX |
+        | Works well when n is large | Slow if n is very large                    |
+
+    * non-invertible
+
+        * reductant features (linearly dependent)
+
+        * to many features
