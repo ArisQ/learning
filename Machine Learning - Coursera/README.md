@@ -123,3 +123,135 @@
         * reductant features (linearly dependent)
 
         * to many features
+
+            * regularization
+
+* Logistic Regression (Classification algorithm)
+
+    * Hypothesis Representation
+
+        * Want $0 \le h_\theta (x) < 1$
+
+        * $h_\theta(x)=g(\theta^T x)$ where $\displaystyle{ g(z) = \frac{1}{1+e^{-z}}} $, $g(z)$ is called Sigmoid function or Logistic function.
+
+        ![Sigmoid Function](images/sigmoid_function.png)
+
+        * $h_\theta(x)=P(y=1|x;\theta)$ means probability that $y=1$ given $x$, parameterized by $\theta$
+
+            $P(y=0|x;\theta)=1-P(y=1|x;\theta)$
+
+    * Decision Boundary
+
+        * Predict $y=1$ ==> $h_\theta(x) \ge 0.5$  ==> $g(\theta^Tx) \ge 0.5$ ==> $\theta^Tx \ge 0$
+
+        * Predict $y=0$ ==> $h_\theta(x)<0.5$  ==> $g(\theta^Tx)<0.5$ ==> $\theta^Tx<0$
+
+        * Non-linear Decision
+
+    * Cost Function
+
+        * $\displaystyle{J(\theta)=\frac{1}{m}\sum_{i=1}^m Cost(h_\theta(x^{(i)}),y^{(i)})}$
+
+        * $\displaystyle{
+            Cost(h_\theta(x),y)=\begin{cases}
+            -\log(h_\theta(x)) & \text{if } y=1 \\
+            -\log(1-h_\theta(x)) & \text{if } y=0
+            \end{cases}
+            }$
+
+        * $Cost(h_\theta(x),y)$ if $h_\theta(x)=y$
+            $Cost(h_\theta(x),y) \to \infty$ if $y=0$ and $h_\theta(x) \to 1$
+            $Cost(h_\theta(x),y) \to \infty$ if $y=1$ and $h_\theta(x) \to 0$
+
+    * Gradient descent
+
+        * write cost function as
+            $Cost(h_\theta(x),y)=-y\log(h_\theta(x))-(1-y)\log(1-h_\theta(x))$
+
+        * then
+            $\displaystyle{ J(\theta)=-\frac{1}{m}\sum_{i=1}^m[y^{(i)}\log(h_\theta(x^{(i)}))-(1-y^{(i)})\log(1-h_\theta(x^{(i)}))]
+                }$
+
+            or
+            $\displaystyle{ J(\theta) = -\frac{1}{m}(-y^T \log(h_\theta(x) - (1-y)^T \log(1-h_\theta(x)) }$
+
+        * gradient descent algorithm
+
+            repeate until convergence {
+                $\displaystyle{ \theta_j := \theta_j - \alpha \frac{\partial}{\partial \theta_j} J(\theta)}$
+            }
+
+            or
+
+            repeate until convergence {
+                $\displaystyle{ \theta_j := \theta_j - \frac{\alpha}{m} \sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)}) x^{(i)} }$
+            }
+
+            or
+            $\displaystyle{ \theta_j := \theta_j - \frac{\alpha}{m} X^T ( g(X \theta ) - y) }$
+
+    * Advanced Optimization
+        * Conjugate gradient
+        * BFGS
+        * L-BFGS
+
+        ```matlab
+        fminunc(FCN,X0,OPTIONS)
+        ```
+
+    * Multi Classification
+        One-vs-All (one-vs-rest)
+
+        * $y \in \{0,1, \cdots ,n\}$
+
+        * $\displaystyle{
+            h_\theta^{(i)}=P(y=i|x;\theta) \text{ where } i=0,1,\cdots,n
+            }$
+
+        * $\displaystyle{ prediction=\max\limits_i(h_\theta^{(i)} (x)) }$
+
+* The problem of overfitting
+
+    * Underfit / High bias
+    * "Just right"
+    * Overfit / High variance
+
+    * Addressing overfitting
+        * Reduce number of features
+            * Manually select which features to keep.
+            * Use a model selection algorithm (studied later in the course).
+        * Regularization
+            * Keep all the features, but reduce the magnitude of parameters $\theta_j$.
+            * Regularization works well when we have a lot of slightly useful features.
+
+    * Regularized linear regression
+
+        * cost function
+
+            $$J(\theta) = \frac{1}{2m} \left[ \sum_{i=1}^n ( h_\theta( x^{(i)}) - y^{(i)})^2 + \lambda \sum_{j=1}^n \theta_j^2 \right] $$
+
+            $\lambda$ is the regularization parameter.
+
+        * gradient descent
+
+            repeate {
+                $\displaystyle{\theta_0 := \theta_0 - \alpha \frac{\partial}{\partial \theta_0} J(\theta)}$
+                $\displaystyle{\theta_j := \theta_j - \alpha \frac{\partial}{\partial \theta_j} J(\theta) +\frac{\lambda}{m}\theta_j }$ (for $j=1 \cdots n$)
+            }
+
+        * Normal Equation
+
+            $$\theta=(X^T X + \lambda \cdot L)^-1 X^T y $$
+            where $L=\left[
+            \begin{matrix}
+            0& & & & \\
+             &1& & & \\
+             & &1& & \\
+             & & &\ddots& \\
+             & & & &1
+            \end{matrix}
+            \right]$
+
+    * Regularized logistic regression
+
+    $$J(\theta)=-\frac{1}{m} \sum_{i=1}^m [ y^{(i)} \log(h_\theta(x^{(i)})) - (1-y^{(i)}) \log(1-h_\theta(x^{(i)}))] + \frac{\lambda}{2m} \sum_{j=1}^n \theta_j^2 $$
