@@ -255,3 +255,33 @@
     * Regularized logistic regression
 
     $$J(\theta)=-\frac{1}{m} \sum_{i=1}^m [ y^{(i)} \log(h_\theta(x^{(i)})) - (1-y^{(i)}) \log(1-h_\theta(x^{(i)}))] + \frac{\lambda}{2m} \sum_{j=1}^n \theta_j^2 $$
+
+* Neural Network
+
+    * Model Representation
+        ![Neural Network](images/neural_network.png)
+
+        * $x_0 x_1 x_2$ is called the **input layer** / layer 1
+
+        * $h_\Theta(x)$ is the **output layer**
+
+        * others between input and output layer is **hidden layer**
+
+        * $a_i^{(j)}$ is activations of unit $i$ in layer $j$
+
+            $$\left[ \begin{array}{c}  x_0 \\  x_1 \\  x_2 \\  x_3  \end{array} \right] \to
+            \left[ \begin{array}{c}  a_1^{(2)} \\  a_2^{(2)} \\ a_3^{(2)}  \end{array} \right] \to
+            h_\Theta(x)$$
+
+        * $\Theta(j)$ is matrix of weights controlling function mapping from layer $j$ to layer $j+1$
+
+            $$\begin{array}{rcl}
+            a_1^{(2)} & = & g(\Theta_{10}^{(1)} x_0 + \Theta_{11}^{(1)} x_1 + \Theta_{12}^{(1)} x_2 + \Theta_{13}^{(1)} x_3) \\
+            a_2^{(2)} & = & g(\Theta_{20}^{(1)} x_0 + \Theta_{21}^{(1)} x_2 + \Theta_{22}^{(1)} x_2 + \Theta_{23}^{(1)} x_3) \\
+            a_3^{(2)} & = & g(\Theta_{30}^{(1)} x_0 + \Theta_{31}^{(1)} x_3 + \Theta_{32}^{(1)} x_2 + \Theta_{33}^{(1)} x_3) \\
+            h_\Theta(x)=a_1^{(3)} & = & g(\Theta_{10}^{(2)} a_0^{(2)} + \Theta_{11}^{(2)} a_1^{(2)} + \Theta_{12}^{(2)} a_2^{(2)} + \Theta_{13}^{(2)} a_3^{(2)})
+            \end{array}$$
+
+        * $\Theta(j)$ is a matrix of demension of $s_{j+1} \times (s_j+1)$, wher $s_j$ is the number of nodes in layer $j$.
+
+        * $z^{(i+1)}=\Theta^{(i)} a^{(i)}$
