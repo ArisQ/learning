@@ -285,3 +285,60 @@
         * $\Theta(j)$ is a matrix of dimension of $s_{j+1} \times (s_j+1)$, where $s_j$ is the number of nodes in layer $j$.
 
         * $z^{(i+1)}=\Theta^{(i)} a^{(i)}$
+
+    * Cost Function
+
+        $$J(\Theta)=- \frac{1}{m} \sum_{i=1}^m \sum_{k=1}^K \left[ y_k^{i} \log({( h_\Theta(x^{(i)}) )}_k) + (1-y_k^{(i)}) \log(1-{(h_\Theta(x^{(i)})}_k) \right] + \frac{\lambda}{2m} \sum_{l=1}^{L-1} \sum_{i=1}^{s_l} \sum_{j=1}^{s_{l+1}} {(\Theta_{j,i}^{(l)})}^2$$
+
+    * Backpropagation Algorithm
+
+        * $\delta^{(L)}=a^{(L)}-y^{(t)}$
+
+        * $\delta^{(l)}=(\Theta^{(l)})^T \theta^{(l+1)} .* g'(z^{(l)})$
+
+            * $g'(z^{(l)})= a^{(l)} .* (1-a^{(l)})$
+
+        ![Backpropagation Algorithm](images/backpropagation_algorithm.png)
+
+        * refer to *inverse kinematics* and *Jacobian matrix*
+
+    * Practice
+
+        * Unroll
+
+            ```matlab
+            thetaVec=[theta1(:);theta2(:);theta(:)]
+            theta1=reshape(thetaVec(1:110),10,11)
+            theta2=reshape(thetaVec(111:220),10,11)
+            theta3=reshape(thetaVec(221:231),1,11)
+            ```
+
+        * Gradient Check
+
+            $$\frac{\partial}{\partial \Theta} J(\Theta)=\frac{J(\Theta + \epsilon)-J(\Theta - \epsilon)}{2\epsilon} $$
+
+            * check $gradApprox \approx deltaVector$
+
+        * Initialization
+
+            * Zero initialization (incorrect)
+
+            * Random initialization $[-\epsilon, \epsilon]$
+
+        * Put together
+
+            * pick network architecture
+
+            * randomly initialize the weights
+
+            * implement forward propagation to get $h_\Theta(x^{(i)})$ for any $x^{(i)}$
+
+            * implement cost Function
+
+            * implement backpropagation to compute partial derivatives
+
+            * use gradient checking to confirm that backpropagation works. Then disable gradient checking
+
+            * use gradient descent to built-in optimization to minimize the cost function with the weights in theta.
+
+    * Application: autonomous driving
