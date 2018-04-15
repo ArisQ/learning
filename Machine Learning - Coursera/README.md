@@ -28,7 +28,7 @@
 
     * notation
 
-        * $m$ : Number of traing examples
+        * $m$ : Number of training examples
 
         * $x$'s : input variable/features
 
@@ -59,7 +59,7 @@
 
     * Gradient descent algorithm
 
-        repeate until convergence {
+        repeat until convergence {
             $\theta_j := \theta_j - \alpha \frac{\partial}{\partial \theta_j} J(\theta_0, \theta_1)$ (for $j=0$ and $j=1$)
         }
 
@@ -83,7 +83,7 @@
 
         * $x_j^{(i)}$ is the $i^{th}$ input of feature $j$
 
-        * surpose $x_0=0$
+        * suppose $x_0=0$
             $h_\theta(x)=\theta^T x$ where $\theta=[\theta_0, \theta_1,\cdots,\theta_n]^T$ and $x=[x_0, x_1,\cdots,x_n]^T$
 
     * Gradient descent
@@ -93,7 +93,7 @@
             $$J(\theta)=J(\theta_0, \theta_1,\cdots,\theta_n) = \frac{1}{2m}\sum_{i=1}^n(h_\theta(x^{(i)})-y^{(i)})^2 = \frac{1}{2m}\sum_{i=1}^n(\theta^T x^{(i)}-y^{(i)})^2$$
 
         * algorithm
-            repeate until convergence {
+            repeat until convergence {
                 $\displaystyle{\theta_j := \theta_j - \alpha \frac{\partial}{\partial \theta_j} J(\theta)}$ (for $j=0 \cdots n$)
             }
 
@@ -107,20 +107,20 @@
 
 * Normal Equation
 
-    $$\theta=(X^T X ^{-1} X^T y$$
+    $$\theta=(X^T X ^{-1}) X^T y$$
 
-    * advantages and disadvangtages
+    * advantages and disadvantages
 
         | Gradient Descent           | Normal Equation                            |
         |:---------------------------|:-------------------------------------------|
         | Need to choose alpha       | No need to choose alpha                    |
         | Needs many iterations      | No need to iterate                         |
-        | $O(kn^2)$                  | $O(n^3)$, need to calculate inverse of XTX |
+        | $O(kn^2)$                  | $O(n^3)$, need to calculate inverse of $X^TX$ |
         | Works well when n is large | Slow if n is very large                    |
 
     * non-invertible
 
-        * reductant features (linearly dependent)
+        * redundant features (linearly dependent)
 
         * to many features
 
@@ -177,13 +177,13 @@
 
         * gradient descent algorithm
 
-            repeate until convergence {
+            repeat until convergence {
                 $\displaystyle{ \theta_j := \theta_j - \alpha \frac{\partial}{\partial \theta_j} J(\theta)}$
             }
 
             or
 
-            repeate until convergence {
+            repeat until convergence {
                 $\displaystyle{ \theta_j := \theta_j - \frac{\alpha}{m} \sum_{i=1}^m (h_\theta(x^{(i)}) - y^{(i)}) x^{(i)} }$
             }
 
@@ -234,7 +234,7 @@
 
         * gradient descent
 
-            repeate {
+            repeat {
                 $\displaystyle{\theta_0 := \theta_0 - \alpha \frac{\partial}{\partial \theta_0} J(\theta)}$
                 $\displaystyle{\theta_j := \theta_j - \alpha \frac{\partial}{\partial \theta_j} J(\theta) +\frac{\lambda}{m}\theta_j }$ (for $j=1 \cdots n$)
             }
@@ -254,7 +254,7 @@
 
     * Regularized logistic regression
 
-    $$J(\theta)=-\frac{1}{m} \sum_{i=1}^m [ y^{(i)} \log(h_\theta(x^{(i)})) - (1-y^{(i)}) \log(1-h_\theta(x^{(i)}))] + \frac{\lambda}{2m} \sum_{j=1}^n \theta_j^2 $$
+      $$J(\theta)=-\frac{1}{m} \sum_{i=1}^m [ y^{(i)} \log(h_\theta(x^{(i)})) - (1-y^{(i)}) \log(1-h_\theta(x^{(i)}))] + \frac{\lambda}{2m} \sum_{j=1}^n \theta_j^2 $$
 
 * Neural Network
 
@@ -282,6 +282,6 @@
             h_\Theta(x)=a_1^{(3)} & = & g(\Theta_{10}^{(2)} a_0^{(2)} + \Theta_{11}^{(2)} a_1^{(2)} + \Theta_{12}^{(2)} a_2^{(2)} + \Theta_{13}^{(2)} a_3^{(2)})
             \end{array}$$
 
-        * $\Theta(j)$ is a matrix of demension of $s_{j+1} \times (s_j+1)$, wher $s_j$ is the number of nodes in layer $j$.
+        * $\Theta(j)$ is a matrix of dimension of $s_{j+1} \times (s_j+1)$, where $s_j$ is the number of nodes in layer $j$.
 
         * $z^{(i+1)}=\Theta^{(i)} a^{(i)}$
